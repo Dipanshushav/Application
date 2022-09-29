@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:taskproject/auth.dart';
 import 'package:taskproject/chat.dart';
 import 'package:taskproject/home.dart';
@@ -11,36 +12,45 @@ class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
+
 final FirebaseAuth auth = FirebaseAuth.instance;
+
 class _LoginState extends State<Login> {
-
-
   // final _auth = authentic ();
   final _formKey = GlobalKey<FormState>();
+
   // var authentics= authentic();
-  String email ="";
+  String email = "";
   String password = "";
-  GlobalKey<FormState>_formkey=GlobalKey<FormState>();
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Login'),
-          actions: [TextButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Signin()));
-          }, child: Text('signup',style: TextStyle(color: Colors.black),))],
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Signin()));
+                },
+                child: Text(
+                  'signup',
+                  style: TextStyle(color: Colors.black),
+                ))
+          ],
         ),
-        body:Form(
+        body: Form(
           key: _formkey,
           child: Center(
             child: ListView(
               children: [
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'email'),
-                  onChanged: (val){
+                  onChanged: (val) {
                     setState(() {
-                      email=val;
+                      email = val;
                     });
                   },
                   // controller: email,
@@ -57,11 +67,12 @@ class _LoginState extends State<Login> {
                   height: 10,
                 ),
                 TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'password'),
+                  decoration:
+                      textInputDecoration.copyWith(hintText: 'password'),
                   // controller: passwordcontroller,
-                  onChanged: (val){
+                  onChanged: (val) {
                     setState(() {
-                      password=val;
+                      password = val;
                     });
                   },
                   validator: (val) {
@@ -73,31 +84,36 @@ class _LoginState extends State<Login> {
                       };
                   },
                 ),
-                RaisedButton(onPressed: () async {
-    try {
-    var result =
-    await auth.signInWithEmailAndPassword(email: email, password: password).then((value) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Myhome()));
-      print(email);
-      print(password);
-    });
-    // User? user = result.user;
-    // print(user);
+                RaisedButton(
+                  onPressed: () async {
+                    try {
+                      await auth
+                          .signInWithEmailAndPassword(
+                              email: email, password: password)
+                          .then((value) {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Myhome()));
+                        print(email);
+                        print(password);
+                      });
+                      // User? user = result.user;
+                      // print(user);
 
-
-                    print(password); print(email);
-                    print('hello');
-                  }catch(e){
-                    print(e);
-                  }
-                },child: Text("signIn"),)
+                      print(password);
+                      print(email);
+                      print('hello');
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                  child: Text("signIn"),
+                )
               ],
             ),
           ),
         ));
   }
 }
-
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -114,9 +130,11 @@ const textInputDecoration = InputDecoration(
 Future signIn(String email, String password) async {
   try {
     var result =
-    await auth.signInWithEmailAndPassword(email: email, password: email);
+        await auth.signInWithEmailAndPassword(email: email, password: email);
     User? user = result.user;
     print(user);
     return Future.value(user);
-  } catch (e) {print(e);}
+  } catch (e) {
+    print(e);
+  }
 }

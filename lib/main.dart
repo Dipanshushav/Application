@@ -9,20 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:taskproject/LogPage.dart';
 
- main() async {
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
-}class MyApp extends StatelessWidget {
+}
+
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // User? user =FirebaseAuth.instance.currentUser!();
 
-
-    return MaterialApp(
-    home: Login());
+    return MaterialApp(home: Login());
 //        FutureBuilder(
 //         future: ,
 //         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -34,21 +34,15 @@ import 'package:taskproject/LogPage.dart';
 // }
 //     },
 
-
-  // ),
-  //   );
+    // ),
+    //   );
   }
 }
-
-
-
-
-
 
 // class MyApp extends StatelessWidget {
 //   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 //
-//   get storage => null; 
+//   get storage => null;
 //   Future<bool> checkLoginStatus() async {
 //     String? value = await storage.read(key: "uid");
 //     if (value == null) {
@@ -57,18 +51,18 @@ import 'package:taskproject/LogPage.dart';
 //     return true;
 //   }
 
-  // @override
-  // Widget build(BuildContext context) {
-    // return FutureBuilder(
-    //     future: _initialization,
-    //     builder: (context, snapshot) {
-    //       // Check for Errors
-    //       if (snapshot.hasError) {
-    //         print("Something Went Wrong");
-    //       }
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return Center(child: CircularProgressIndicator());
-    //       }
+// @override
+// Widget build(BuildContext context) {
+// return FutureBuilder(
+//     future: _initialization,
+//     builder: (context, snapshot) {
+//       // Check for Errors
+//       if (snapshot.hasError) {
+//         print("Something Went Wrong");
+//       }
+//       if (snapshot.connectionState == ConnectionState.waiting) {
+//         return Center(child: CircularProgressIndicator());
+//       }
 //           return MaterialApp(
 //             title: 'Flutter Firebase EMail Password Auth',
 //             theme: ThemeData(

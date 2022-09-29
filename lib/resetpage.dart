@@ -27,47 +27,52 @@ class _SigninState extends State<Signin> {
         ),
         body:Form(
           key: _formkey,
-          child: Center(
-            child: ListView(
-              children: [
-                TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'email'),
-                  controller: emailController,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'enter  valide email';
-                    } else
-                          () {
-                        return null;
-                      };
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'password'),
-                  controller: passwordController,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'enter email';
-                    } else
-                          () {
-                        return null;
-                      };
-                  },
-                ),
-                RaisedButton(onPressed: (){
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Center(
+              child: ListView(
+                children: [
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'email'),
+                    controller: emailController,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return 'enter  valide email';
+                      } else
+                            () {
+                          return null;
+                        };
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'password'),
+                    controller: passwordController,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return 'enter email';
+                      } else
+                            () {
+                          return null;
+                        };
+                    },
+                  ),
+                  SizedBox(height: 10,),
+                  RaisedButton(onPressed: () async {
 if(_formkey.currentState!.validate()){
-  var response= auth.createUserWithEmailAndPassword(
-      email: emailController.text, password: passwordController.text).then((value) {
+
+  await auth.createUserWithEmailAndPassword(
+      email: emailController.text, password: passwordController.text).whenComplete((){
         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Myhome()));
   });
 }
 
 
-                },child: Text("signIn"),)
-              ],
+                  },child: Text("Register"),)
+                ],
+              ),
             ),
           ),
         ));
